@@ -9,10 +9,10 @@ const songsData = {
     "link" : "https://storage.googleapis.com/mystic-73626.appspot.com/Jayadeva%20Bhajan.mp3"
 	},{
     "title" : "Mahamantra-HHMurali",
-    "link" : "https://storage.googleapis.com/mystic-73626.appspot.com/001-MAHA-MANTRA-KIRTAN.mp"
+    "link" : "https://storage.googleapis.com/mystic-73626.appspot.com/001-MAHA-MANTRA-KIRTAN.mp3"
 	},{
     "title" : "Mahamantra-Kalpana",
-    "link" : "https://storage.googleapis.com/mystic-73626.appspot.com/Mahamantra%20Kirtan.mp"
+    "link" : "https://storage.googleapis.com/mystic-73626.appspot.com/Mahamantra%20Kirtan.mp3"
 	}]
 };
 
