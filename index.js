@@ -2,7 +2,18 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const songsData = require('./data');
+
 var port = process.env.PORT || 8000;
+
+/**
+ * @template T
+ * @param {Array<T>} array The array to get a random value from
+ */
+const getRandomValue = array => array[Math.floor(Math.random() * array.length)];
+
+/** @param {Array<string>} messages The messages to concat */
+const concat = messages => messages.map(message => message.trim()).join(' ');
 
 const restService = express();
 
@@ -12,12 +23,17 @@ restService.use(bodyParser.urlencoded({
 
 restService.use(bodyParser.json());
 
-restService.post('/echo', function(req, res) {
-  var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
+restService.post('/', function(req, res) {
+ //get from local file
+ let song = getRandomValue(songsData.songsData.list).link ;
+
+ let songsAudioTag =  "<audio src='"+song+"'> That's all for now</audio>";
+ let songText =  `<speak>${concat([songsAudioTag])}</speak>`;
+ 
   return res.json({
-    speech: speech,
-    displayText: speech,
-    source: 'webhook-echo-sample'
+    speech: songText,
+    displayText: songText,
+    source: 'webhook-song-sample'
   });
 });
 
