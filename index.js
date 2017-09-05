@@ -1,8 +1,11 @@
 'use strict';
 
 const express = require('express');
+const fs = require('fs');
 const bodyParser = require('body-parser');
 const songsData = require('./data').songsData;
+const {whereAmI} = require('./data');
+const jsonData = require('./jsonData.json');
 
 var port = process.env.PORT || 8000;
 
@@ -24,15 +27,20 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.post('/', function(req, res) {
-  //get from local file
-  let song = getRandomValue(songsData.list).link;
-
+  //get random link from local file
+  //let song = getRandomValue(songsData.list).link;
+  let songs = jsonData.songsList;
+  let songTitle = "kinchit.org-"+jsonData.whereAmI;
+  let song = songs.find(o => o.title.includes(songTitle)).link;
   let songsAudioTag = "<audio src='" + song + "'> That's all for now</audio>";
   let songText = `<speak>${concat([songsAudioTag])}</speak>`;
-
+  console.log(`playing song ${song}`);
+  //update index
+  jsonData.whereAmI = jsonData.whereAmI +1;
+  fs.writeFileSync('./jsonData.json', JSON.stringify(jsonData));
   return res.json({
     speech: songText,
-    displayText: songText,
+    displayText: song,
     source: 'webhook-song-sample'
   });
 });

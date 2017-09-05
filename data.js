@@ -1,5 +1,8 @@
 const deepFreeze = require('deep-freeze');
 
+const whereAmI = {
+	songIndex:0
+};
 const songsData = {
   list: [{
 		"title": "Sharadhe karuna",
@@ -614,7 +617,7 @@ const songsData = {
 };
 
 
-// Use deepFreeze to make the constant objects immutable so they are not unintentionally modified
-module.exports = deepFreeze({
-  songsData
-});
+module.exports = {
+  songsData,
+  whereAmI
+};
